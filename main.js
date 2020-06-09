@@ -9,19 +9,55 @@ const replaceAllButton = document.querySelector(".replace-all-button")
 // Later you will need an OUTER LOOP to loop over the individual elements within
 // this array.
 const rowElements = document.querySelectorAll(".row")
+// for (let index = 0; index < rowElements.length; index++) {
+// const element = array[index];
+
+// }
 
 // When you call the function belwo, it will get and return an INNER ARRAY
 // containing the cell elements for a given row.
 // Call this function from WITHIN your row elements loop. Then you will, in turn,
 // need to loop over the resulting cell elements. But where should this whole
 // NESTED LOOP go? Think through the user's experience: when should WHAT happen? 
-function getCellElements (currentRowElement) {
+function getCellElements(currentRowElement) {
     return currentRowElement.querySelectorAll(".cell")
+
 }
 
 
 // YOUR CODE GOES HERE
 
+replaceAllButton.addEventListener('click', function () {
+    let searchString = findInput.value
+    let replaceString = replaceInput.value
+    for (let rowIndex = 0; rowIndex < rowElements.length; rowIndex++) {
+        const currentRowElement = rowElements[rowIndex];
+        // console.log(currentRowElement);
+        let cellElements = getCellElements(currentRowElement)
+        // console.log(cellElements);
+        for (let cellIndex = 0; cellIndex < cellElements.length; cellIndex++) {
+            const currentCellElement = cellElements[cellIndex];
+            // console.log(currentCellElement);
+            let currentCellString = currentCellElement.innerHTML
+            // console.log(currentCellString);
+
+            // console.log(currentCellString.includes(searchString))
+            while (currentCellString.includes(searchString)) {
+                currentCellString = currentCellString.replace(searchString, replaceString)
+                console.log(currentCellString);
+
+
+            }
+            currentCellElement.innerHTML = currentCellString
+
+
+
+        }
+
+
+
+    }
+})
 
 // One last thing: dedicate very careful attention to using variables and
 // naming them accurately.
